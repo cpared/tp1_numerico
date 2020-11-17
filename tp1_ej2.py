@@ -28,12 +28,16 @@ def calcular_raiz(a,b,c):
 def imprimir_resultado(a,b,c):
     x1, x2 = primer_metodo(a,b,c)
     y1, y2 = segundo_metodo(a,b,c)
+
     data = pd.DataFrame({
                         "Primer resultado": pd.Series([x1,x2], dtype=np.dtype("float32")),
                         "Segundo resultado": pd.Series([y1,y2], dtype=np.dtype("float32")),
                         })
-    print(data)
-    print(data.dtypes)
+    
+    data.index = ["x1", "x2"]
+
+    print("\n ## Resultados ## \n\n", data)
+    print("\n ## Tipos de dato trabajados ## \n\n", data.dtypes, "\n")
 
 def main():
     a = 1
