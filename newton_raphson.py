@@ -1,7 +1,6 @@
 """NEWTON RAPHSON FUNCION 1"""
 
 import numpy as np
-from scipy import optimize
 
 R = 4.25
 N = 6
@@ -70,14 +69,13 @@ def main():
     iteraciones = 6
     root = newton_raphson_x_cota(f, df, p0, 1e-16, True)
     print("Resultado Newton-Raphson:  ", root)
-    print("Resultado optimize.brentq: ", optimize.brentq(f, 0, 4))
+    # print("Resultado optimize.brentq: ", optimize.brentq(f, 0, 4))
   
 main()
 
 
 """NEWTON RAPHSON FUNCION 2"""
-"""
-import numpy as np
+
 R = 4.25
 N = 6
 S = 20
@@ -100,6 +98,5 @@ def nr_mod(f,df,xi):
   print("Las iteraciones son: {}".format(n))
 def main():
   nr_mod(f,df,xi)
-main()
 
-"""
+main()

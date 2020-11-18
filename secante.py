@@ -16,8 +16,8 @@ S = 20      #Suma ultimo digito del padron
 #Usar x = np.linspace(-np.pi, np.pi, 1000)
 #Rango para semilla por biseccion de 0 a np.pi/2
 #Semilla np.pi/4 y 0.5
-def f(x):
-    return (np.cos(x)-x)
+# def f(x):
+#     return (np.cos(x)-x)
 
 
 def biseccion_x_iteracion(f, a, b, iteracion_max, mostrar_tabla=False):
@@ -100,28 +100,28 @@ def secante_x_iteracion(f,p0, p1, iteracion_max, mostrar_tabla=False):
     return pn
 
 
-def main():
-    #Graifco la funcion pedida
-    # x = np.linspace(-np.pi, 5, 1000)
-    x = np.linspace(-np.pi, np.pi, 1000)
-    plt.plot(x, f(x), "blue")
-    plt.show()
+# def main():
+#     #Graifco la funcion pedida
+#     # x = np.linspace(-np.pi, 5, 1000)
+#     x = np.linspace(-np.pi, np.pi, 1000)
+#     plt.plot(x, f(x), "blue")
+#     plt.show()
     
-    print("Resultado optimize.brentq: ", optimize.brentq(f, 0, 4))
-    #p0, i = biseccion_x_iteracion(f, 0, np.pi/2, 1)
-    #p1, i = biseccion_x_iteracion(f, 0, np.pi/2, 2)
-    p0, i = biseccion_x_iteracion(f, 0, 4, 1)
-    p1, i = biseccion_x_iteracion(f, 0, 4, 2)
-    print("P0={0}   |   P1={1}".format(p0, p1))
+#     print("Resultado optimize.brentq: ", optimize.brentq(f, 0, 4))
+#     #p0, i = biseccion_x_iteracion(f, 0, np.pi/2, 1)
+#     #p1, i = biseccion_x_iteracion(f, 0, np.pi/2, 2)
+#     p0, i = biseccion_x_iteracion(f, 0, 4, 1)
+#     p1, i = biseccion_x_iteracion(f, 0, 4, 2)
+#     print("P0={0}   |   P1={1}".format(p0, p1))
 
-    #Con una cota menor a 1e-14, el denominador del cociente de la 
-    #aproximacion de la derivada se va a infinito
-    root = secante_x_cota(f, 0.5, 0.785398163, 1e-14, True)
-    print("Secante x cota: ", root)
+#     #Con una cota menor a 1e-14, el denominador del cociente de la 
+#     #aproximacion de la derivada se va a infinito
+#     root = secante_x_cota(f, 0.5, 0.785398163, 1e-14, True)
+#     print("Secante x cota: ", root)
     
-    #Con mas de 6 iteraciones (de 0 a 5), el denominador del cociente de la
-    #aproximacion de la derivada se va a infinito
-    root = secante_x_iteracion(f, 0.5, 0.785398163, 8, True)     
-    print("Secante x iteracion: ", root)
+#     #Con mas de 6 iteraciones (de 0 a 5), el denominador del cociente de la
+#     #aproximacion de la derivada se va a infinito
+#     root = secante_x_iteracion(f, 0.5, 0.785398163, 8, True)     
+#     print("Secante x iteracion: ", root)
 
-main()
+# main()

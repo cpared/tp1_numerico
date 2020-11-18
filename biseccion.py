@@ -34,7 +34,7 @@ def biseccion_x_cota(f, a, b, cota_limite):
         f_a = f(a)
         f_b = f(b)
         f_medio = f(medio)
-        print("Iter:{0}  |  a:{1}  |  b:{2}  |  medio:{3}  |  f(a):{4}  |  f(b):{5}  |  f(medio){6}".format(iteraciones, a, b, medio, f(a), f(b), f(medio)))
+        #print("Iter:{0}  |  a:{1}  |  b:{2}  |  medio:{3}  |  f(a):{4}  |  f(b):{5}  |  f(medio){6}".format(iteraciones, a, b, medio, f(a), f(b), f(medio)))
         
         #Verificacion del caso limite donde la raiz cae en algun extremo
         if f_a == 0: return a, iteraciones
@@ -66,7 +66,7 @@ def biseccion_x_iteracion(f, a, b, iteracion_max):
         f_a = f(a)
         f_b = f(b)
         f_medio = f(medio)
-        print("Iter:{0}  |  a:{1}  |  b:{2}  |  f(a):{3}  |  f(b):{4}  |  f(medio){5}".format(i, a, b, f(a), f(b), f(medio)))
+        #print("Iter:{0}  |  a:{1}  |  b:{2}  |  f(a):{3}  |  f(b):{4}  |  f(medio){5}".format(i, a, b, f(a), f(b), f(medio)))
         
         #Verificacion del caso limite donde la raiz cae en algun extremo
         if f_a == 0: return a, i
@@ -84,22 +84,20 @@ def biseccion_x_iteracion(f, a, b, iteracion_max):
             
     return medio, i
 
+# def main():
+#     #Grafico la funcion pedida
+#     x = np.linspace(-np.pi, np.pi, 1000)
+#     plt.plot(x, f(x), "blue")
+#     plt.show()
+
+#     cota = 0.001
+#     root_biseccion, iteraciones = biseccion_x_cota(f, 1, 3, cota)   
+#     print("**********************")
+#     root_biseccion, iteraciones = biseccion_x_iteracion(f, 1, 3, 10)
+#     print("**********************")
+#     root_posta =  optimize.brentq(f, 1, 3)
+#     print("Resultado correcto: ", root_posta)
+#     print("Resultado Biseccion: {0}  |   Cota: {1}  |  Iteraciones: {2}".format(root_biseccion, cota, iteraciones))
 
 
-def main():
-    #Grafico la funcion pedida
-    x = np.linspace(-np.pi, np.pi, 1000)
-    plt.plot(x, f(x), "blue")
-    plt.show()
-
-    cota = 0.001
-    root_biseccion, iteraciones = biseccion_x_cota(f, 1, 3, cota)   
-    print("**********************")
-    root_biseccion, iteraciones = biseccion_x_iteracion(f, 1, 3, 10)
-    print("**********************")
-    root_posta =  optimize.brentq(f, 1, 3)
-    print("Resultado correcto: ", root_posta)
-    print("Resultado Biseccion: {0}  |   Cota: {1}  |  Iteraciones: {2}".format(root_biseccion, cota, iteraciones))
-
-
-main()
+# main()
