@@ -33,7 +33,7 @@ def imprimir_resultado(a,b,c):
                         "Primer resultado": pd.Series([x1,x2], dtype=np.dtype("float32")),
                         "Segundo resultado": pd.Series([y1,y2], dtype=np.dtype("float32")),
                         })
-    
+
     data.index = ["x1", "x2"]
 
     print("\n ## Resultados ## \n\n", data)
