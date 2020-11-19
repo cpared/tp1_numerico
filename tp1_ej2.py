@@ -18,8 +18,8 @@ def segundo_metodo(a,b,c):
 
 def calcular_raiz(a,b,c):
     """
-        Recibe los valores a,b,c correspondientes a los valores de una funcion cuadratica
-        y utiliza el metodo correcto en base a si b >> a.c
+    Recibe los valores a,b,c correspondientes a los valores de una funcion cuadratica
+    y utiliza el metodo correcto en base a si b >> a.c
     """
     if b > (a*c*MULTIPLICADOR):
         return primer_metodo(a,b,c)

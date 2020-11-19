@@ -35,8 +35,8 @@ def ddf(x):
 def funcion_g(x):
   return ((x**3)/(3*R)+(VOL_PEDIDO*4*R**2)/3)**(1/2)
 
-def calcular_cte_asintotica():
-    pass
+def calcular_cte_asintotica(p0, p1, n):
+    return abs(p1) / (abs(p0) ** n)
 
 def calcular_raices(f, funcion_g, a, b):
 
@@ -68,8 +68,12 @@ def calcular_raices(f, funcion_g, a, b):
     data = pd.DataFrame(tabla_resultados)
 
     data.index = ["Brent","Biseccion por cota","Punto Fijo","Newton-Raphson","Newton-Raphson modif.","Secante"]
-    
+
     return data
+
+def graficar_cte_asintotica(data):
+    pass
+
 
 def graficar_orden_convergencia(a,b):
     # p0, i1 = biseccion_x_iteracion(f1, a, b, 1)
@@ -80,6 +84,7 @@ def graficar_orden_convergencia(a,b):
     ordenConvergenciaPuntoFijo = estimar_orden_convergencia(historial_raices, i)
 
     plt.figure()
+    plt.grid(True)
     plt.plot(ordenConvergenciaPuntoFijo[:,0], ordenConvergenciaPuntoFijo[:,1], '-', lw=2, label="Punto Fijo")
 
 def graficar_funciones(x):
