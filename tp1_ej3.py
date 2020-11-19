@@ -85,6 +85,7 @@ def graficar_orden_convergencia(a,b):
 
     plt.figure()
     plt.grid(True)
+    plt.set_title("Orden Convergencia")
     plt.plot(ordenConvergenciaPuntoFijo[:,0], ordenConvergenciaPuntoFijo[:,1], '-', lw=2, label="Punto Fijo")
 
 def graficar_funciones(x):
