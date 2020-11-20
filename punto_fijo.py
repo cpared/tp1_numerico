@@ -10,16 +10,15 @@ nro_max_iteraciones=80
 
 def punto_fijo(f, df, a, b, tolerancia):
   semilla= (a+b)/2
-  historia=np.zeros([nro_max_iteraciones,2])
-  historia[0]= (0,semilla)
+  historia= []
+  historia.append((0,semilla))
   p_anterior=semilla
   i=1
   
   while i<nro_max_iteraciones:
     p= f(p_anterior)
-    historia[i]=(i,p)
+    historia.append((i,p))
     if np.fabs((p-p_anterior)) < tolerancia:
-      historia= historia[:i+1] 
       #si se llega a una raiz en una iteracion menor al numero maximo de iteraciones
       #no se consideran los valores 0 que sobran en la lista historia
       return p,i,historia

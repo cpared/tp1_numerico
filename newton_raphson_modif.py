@@ -3,19 +3,21 @@
 import pandas as pd
 import numpy as np
 
-ITER = 100
+ITER_MAX = 80
 
 def newton_raphson_mod(f,df,ddf,p0,tolerancia):
     i = 1
     x = p0
-    valores = []
+    historia=[(0,x)]
     errores = []
-    while i < ITER:
-        valores.append(x)
+    while i < ITER_MAX:
         x = x-(f(x)*df(x))/((df(x)**2)-f(x)*ddf(x))
+        resultados=(i,x)
+        historia.append(resultados)
         if abs(x - p0) < tolerancia:
-            break
+            # historia= historia[:i+1]
+            return x,i,historia
         errores.append(abs(x - p0))
-        p0 = x
         i += 1
-    return x,i,valores
+        p0 = x
+    return x,i,historia

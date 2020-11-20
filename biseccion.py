@@ -2,34 +2,41 @@
 
 import numpy as np
 
-
-
 def biseccion_x_cota(f, a, b, cota_limite):
     
+    if f(a)*f(b) >= 0:
+        raise ValueError("f(a) y f(b) deben tener diferente signo")
+
     #Verifico el caso particular en donde la raiz esta en los extremos
     #pero no corto el algoritmo
-    if f(a)==0: print("Se detecta Un valor de f(x)=0 en ", a)
-    if f(b)==0: print("Se detecta Un valor de f(x)=0 en ", b)
-    
-    # if f(a)*f(b) >= 0:
-    #     raise ValueError("f(a) y f(b) deben tener diferente signo")
-        
-    medio = (b - a)/2 + a
+    # if f(a)==0: print("Se detecta Un valor de f(x)=0 en ", a)
+    # if f(b)==0: print("Se detecta Un valor de f(x)=0 en ", b)
+    medio = (b - a)/2 + a     
     cota = abs(b - a)
-    iteraciones = 0
-    valores = []
-    valores.append(medio)
+    i = 0
+    historia = [(0,medio)]
     
     while cota > cota_limite:
-        iteraciones += 1
+        i += 1
         f_a = f(a)
         f_b = f(b)
         f_medio = f(medio)
         
         #Verificacion del caso limite donde la raiz cae en algun extremo
-        if f_a == 0: print("Se detecta Un valor de f(x)=0 en ", a)
-        if f_b == 0: print("Se detecta Un valor de f(x)=0 en ", b)
-        if f_medio == 0: print("Se detecta Un valor de f(x)=0 en ", medio)
+        # if f_a == 0:
+        #     resultado=(i,a)
+        #     historia.append(resultado)
+        #     return a,i,historia
+        # if f_b == 0:
+        #     resultado=(i,b)
+        #     historia.append(resultado)
+        #     return b,i,historia
+        # if f_medio == 0:
+        #     return medio,i,historia
+
+        # if f_a == 0: print("Se detecta Un valor de f(x)=0 en ", a)
+        # if f_b == 0: print("Se detecta Un valor de f(x)=0 en ", b)
+        # if f_medio == 0: print("Se detecta Un valor de f(x)=0 en ", medio)
         
         if (f_a * f_medio) < 0:
             b = medio
@@ -39,26 +46,24 @@ def biseccion_x_cota(f, a, b, cota_limite):
             a = medio
             medio = (b - a)/2 + a
             cota = abs(b - medio)
-            
-        valores.append(medio) 
+        resultado=(i,medio)
+        historia.append(resultado)
 
-    return medio, iteraciones, valores
+    return medio,i,historia
 
 
 def biseccion_x_iteracion(f, a, b, iteracion_max):
 
-
+    # if f(a)*f(b) >= 0:
+    #     raise ValueError("f(a) y f(b) deben tener diferente signo")   
 
     #Verifico el caso particular en donde la raiz esta en los extremos
     #pero no corto el algoritmo
-    if f(a)==0: print("Se detecta Un valor de f(x)=0 en ", a)
-    if f(b)==0: print("Se detecta Un valor de f(x)=0 en ", b)
-    
-    # if f(a)*f(b) >= 0:
-    #     raise ValueError("f(a) y f(b) deben tener diferente signo")    
-    iteraciones = 0
+    # if f(a)==0: print("Se detecta Un valor de f(x)=0 en ", a)
+    # if f(b)==0: print("Se detecta Un valor de f(x)=0 en ", b) 
+
     medio = (b - a)/2 + a
-    valores = []    
+    historia = [(0,medio)]
     
     for i in range(1, iteracion_max+1):
         f_a = f(a)
@@ -66,20 +71,16 @@ def biseccion_x_iteracion(f, a, b, iteracion_max):
         f_medio = f(medio)
         
         #Verificacion del caso limite donde la raiz cae en algun extremo
-        if f_a == 0: 
-            valores.append(0)
-            return a, iteraciones, valores
-        if f_b == 0: 
-            valores.append(0)
-            return b, iteraciones, valores
-        if f_medio == 0: 
-            valores.append(0)
-            return medio, iteraciones, valores
-        
-        #Verificacion del caso limite donde la raiz cae en algun extremo
-        if f_a == 0: return a, i
-        if f_b == 0: return b, i
-        if f_medio == 0: return medio, i
+        if f_a == 0:
+            resultado=(i,a)
+            historia.append(resultado)
+            return a,i,historia
+        if f_b == 0:
+            resultado=(i,b)
+            historia.append(resultado)
+            return b,i,historia
+        if f_medio == 0:
+            return medio,i,historia
         
         if (f_a * f_medio) < 0:
             b = medio
@@ -87,5 +88,8 @@ def biseccion_x_iteracion(f, a, b, iteracion_max):
         elif (f_b * f_medio) < 0:
             a = medio
             medio = (b - a)/2 + a
-            
-    return medio, i
+
+        resultado=(i,medio)
+        historia.append(resultado)
+        
+    return medio,i,historia
