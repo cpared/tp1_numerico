@@ -8,7 +8,6 @@ from punto_fijo import punto_fijo
 from newton_raphson import newton_raphson_x_cota
 from newton_raphson_modif import newton_raphson_mod
 from secante import secante_x_cota
-from convergencia import estimar_orden_convergencia
 
 S = 20
 N = 6
@@ -16,12 +15,11 @@ MAX_ITER = 100
 R = 4.25
 VOL_PEDIDO = S / (N * 9.5)
 METODO_INVALIDO = "Inválido"
-METODOS = {0:"Brent",
-           1:"Biseccion por cota",
-           2:"Punto Fijo",
-           3:"Newton-Raphson",
-           4:"Newton-Raphson modif.",
-           5:"Secante"}
+METODOS = {0:"Biseccion por cota",
+           1:"Punto Fijo",
+           2:"Newton-Raphson",
+           3:"Newton-Raphson modif.",
+           4:"Secante"}
 CONVERGENCIA = 3
 CTE_ASINTOTICA = 4
 
@@ -64,7 +62,7 @@ def estimar_orden_convergencia(historia_raices,iteraciones):
 
 def imprimir_tabla_resultados(metodos):
 
-    for i in range(1, len(metodos)):
+    for i in range(len(metodos)):
         iteraciones = metodos[i][1]
         historial = metodos[i][2]
         convergencia = metodos[i][3]
@@ -94,14 +92,16 @@ def calcular_raices(resultados):
 
     for cota, resul in resultados.items():
         tabla_resultados[cota] = [elem[0] for elem in resul]
-        
-    data = pd.DataFrame(tabla_resultados)
-    data.index = list(METODOS.values())
 
-    return data
+    return pd.DataFrame(tabla_resultados, index = list(METODOS.values()))
 
-def graficar_cte_asintotica(data):
-    pass
+def calcular_raices_brent(funciones,a,b,indice):
+    raices = {"Brent": []}
+    
+    for f in funciones:
+        raices["Brent"].append(brentq(f,a,b))
+    
+    return pd.DataFrame(raices, index = indice)
 
 def graficar_orden_convergencia(resultados, valor, titulo):
     plt.figure()
@@ -134,8 +134,6 @@ def aplicar_metodos(f, funcion_g, a, b, tolerancia):
     p0 = biseccion_x_iteracion(f, a, b, 1)[0]
     p1 = biseccion_x_iteracion(f, a, b, 2)[0]
 
-    resultados.append(brentq(f,a,b,full_output = True))
-
     try: resultados.append(biseccion_x_cota(f,a,b,tolerancia))
     except ValueError: resultados.append((METODO_INVALIDO,0,0))
 
@@ -149,7 +147,7 @@ def aplicar_metodos(f, funcion_g, a, b, tolerancia):
 def calcular_convergencia_cte_asintotica(metodos):
     resultados = []
 
-    for i in range(1, len(metodos)):
+    for i in range(len(metodos)):
         historial = metodos[i][2]
         iteraciones = metodos[i][1]
 
@@ -178,13 +176,15 @@ def main():
                      "1e-13":aplicar_metodos(f1,funcion_g1,a,b,1e-13)}
 
     resultados_f2 = {"1e-5":aplicar_metodos(f2,funcion_g2,a,b,1e-5),
-                    "1e-13":aplicar_metodos(f1,funcion_g2,a,b,1e-13)}
+                    "1e-13":aplicar_metodos(f2,funcion_g2,a,b,1e-13)}
 
     raices_f1 = calcular_raices(resultados_f1)
     raices_f2 = calcular_raices(resultados_f2)
 
     print("\n ## Resultados f1 ## \n\n", raices_f1)
     print("\n ## Resultados f2 ## \n\n", raices_f2)
+
+    print("\n ## Raíces por brent ## \n\n", calcular_raices_brent([f1,f2,df],a,b,["f1","f2","df"]))
 
     calcular_convergencia_cte_asintotica(resultados_f1["1e-5"])
     calcular_convergencia_cte_asintotica(resultados_f1["1e-13"])
